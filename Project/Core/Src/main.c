@@ -201,10 +201,14 @@ int main(void)
 		  setTimer(1, 500);
 		  switch (status) {
 		  case 1:
+			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
 			  display7SEG(1);
 			  ++status;
 			  break;
 		  case 2:
+			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
+			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
 			  display7SEG(2);
 			  --status;
 			  break;
