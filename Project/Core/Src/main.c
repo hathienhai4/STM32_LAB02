@@ -189,35 +189,19 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   setTimer(0, 1000);
   setTimer(1, 500);
-  setTimer(2, 500);
   int status = 1;
+  HAL_GPIO_WritePin(DOT_GPIO_Port, DOT_Pin, 1);
+  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 1);
   while (1)
   {
-//	  if (isTimerExpired(0) == 1) {
-//		  setTimer(0, 1000);
-//		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-//	  }
-//
-//  	  if (isTimerExpired(1) == 1) {
-//  		  setTimer(1, 500);
-//  		  switch (status) {
-//  		  case 1:
-//  			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
-//  			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
-//  			  display7SEG(1);
-//  			  ++status;
-//  			  break;
-//  		  case 2:
-//  			  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
-//  			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
-//  			  display7SEG(2);
-//  			  --status;
-//  			  break;
-//  		}
-//  	  }
+	  if (isTimerExpired(0) == 1) {
+		  setTimer(0, 1000);
+		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+	  }
 
-  	  if (isTimerExpired(2) == 1) {
-  		  setTimer(2, 500);
+  	  if (isTimerExpired(1) == 1) {
+  		  setTimer(1, 500);
 		  switch (status) {
 		  case 1:
 			  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
