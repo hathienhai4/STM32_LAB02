@@ -194,23 +194,86 @@ const int MAX_LED_MATRIX = 8;
 int index_led_matrix = 0;
 uint8_t matrix_buffer[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
 
+void displayLEDMatrix(uint8_t index){
+    switch (index){
+        case 1:
+        	HAL_GPIO_WritePin(GPIOB, ROW1_Pin | ROW2_Pin | ROW3_Pin | ROW4_Pin | ROW5_Pin | ROW6_Pin | ROW7_Pin, 1);
+        	HAL_GPIO_WritePin(GPIOB, ROW0_Pin, 0);
+            break;
+        case 2:
+        	HAL_GPIO_WritePin(GPIOB, ROW0_Pin | ROW2_Pin | ROW3_Pin | ROW4_Pin | ROW5_Pin | ROW6_Pin | ROW7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOB, ROW1_Pin, 0);
+            break;
+        case 3:
+        	HAL_GPIO_WritePin(GPIOB, ROW0_Pin | ROW1_Pin | ROW3_Pin | ROW4_Pin | ROW5_Pin | ROW6_Pin | ROW7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOB, ROW2_Pin, 0);
+            break;
+        case 4:
+        	HAL_GPIO_WritePin(GPIOB, ROW0_Pin | ROW1_Pin | ROW2_Pin | ROW4_Pin | ROW5_Pin | ROW6_Pin | ROW7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOB, ROW3_Pin, 0);
+            break;
+        case 5:
+        	HAL_GPIO_WritePin(GPIOB, ROW0_Pin | ROW1_Pin | ROW2_Pin | ROW3_Pin | ROW5_Pin | ROW6_Pin | ROW7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOB, ROW4_Pin, 0);
+            break;
+        case 6:
+        	HAL_GPIO_WritePin(GPIOB, ROW0_Pin | ROW1_Pin | ROW2_Pin | ROW3_Pin | ROW4_Pin | ROW6_Pin | ROW7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOB, ROW5_Pin, 0);
+            break;
+        case 7:
+        	HAL_GPIO_WritePin(GPIOB, ROW0_Pin | ROW1_Pin | ROW2_Pin | ROW3_Pin | ROW4_Pin | ROW5_Pin | ROW7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOB, ROW6_Pin, 0);
+            break;
+        case 8:
+        	HAL_GPIO_WritePin(GPIOB, ROW0_Pin | ROW1_Pin | ROW2_Pin | ROW3_Pin | ROW4_Pin | ROW5_Pin | ROW6_Pin, 1);
+			HAL_GPIO_WritePin(GPIOB, ROW7_Pin, 0);
+            break;
+        default:
+            break;
+    }
+}
+
 void updateLEDMatrix(int index){
     switch (index){
         case 0:
+        	HAL_GPIO_WritePin(GPIOA, ENM0_Pin | ENM1_Pin | ENM2_Pin | ENM5_Pin | ENM6_Pin | ENM7_Pin, 1);
+        	HAL_GPIO_WritePin(GPIOA, ENM3_Pin | ENM4_Pin, 0);
+        	displayLEDMatrix(matrix_buffer[index]);
             break;
         case 1:
+        	HAL_GPIO_WritePin(GPIOA, ENM0_Pin | ENM1_Pin | ENM6_Pin | ENM7_Pin, 1);
+        	HAL_GPIO_WritePin(GPIOA, ENM2_Pin | ENM3_Pin | ENM4_Pin | ENM5_Pin, 0);
+			displayLEDMatrix(matrix_buffer[index]);
             break;
         case 2:
+        	HAL_GPIO_WritePin(GPIOA, ENM0_Pin | ENM3_Pin | ENM4_Pin | ENM7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOA, ENM1_Pin | ENM2_Pin | ENM5_Pin | ENM6_Pin, 0);
+			displayLEDMatrix(matrix_buffer[index]);
             break;
         case 3:
+        	HAL_GPIO_WritePin(GPIOA, ENM0_Pin | ENM3_Pin | ENM4_Pin | ENM7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOA, ENM1_Pin | ENM2_Pin | ENM5_Pin | ENM6_Pin, 0);
+			displayLEDMatrix(matrix_buffer[index]);
             break;
         case 4:
+        	HAL_GPIO_WritePin(GPIOA, ENM0_Pin | ENM7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOA, ENM1_Pin | ENM2_Pin | ENM3_Pin | ENM4_Pin | ENM5_Pin | ENM6_Pin, 0);
+			displayLEDMatrix(matrix_buffer[index]);
             break;
         case 5:
+        	HAL_GPIO_WritePin(GPIOA, ENM0_Pin | ENM7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOA, ENM1_Pin | ENM2_Pin | ENM3_Pin | ENM4_Pin | ENM5_Pin | ENM6_Pin, 0);
+			displayLEDMatrix(matrix_buffer[index]);
             break;
         case 6:
+        	HAL_GPIO_WritePin(GPIOA, ENM0_Pin | ENM3_Pin | ENM4_Pin | ENM7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOA, ENM1_Pin | ENM2_Pin | ENM5_Pin | ENM6_Pin, 0);
+			displayLEDMatrix(matrix_buffer[index]);
             break;
         case 7:
+        	HAL_GPIO_WritePin(GPIOA, ENM0_Pin | ENM3_Pin | ENM4_Pin | ENM7_Pin, 1);
+			HAL_GPIO_WritePin(GPIOA, ENM1_Pin | ENM2_Pin | ENM5_Pin | ENM6_Pin, 0);
+			displayLEDMatrix(matrix_buffer[index]);
             break;
         default:
             break;
@@ -254,13 +317,48 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   setTimer(0, 1000);
+  setTimer(1, 250);
+  HAL_GPIO_WritePin(GPIOA, DOT_Pin | LED_RED_Pin, 1);
+  setTimer(2, 10);
   while (1)
   {
-	  if (isTimerExpired(0) == 1) {
-		  setTimer(0, 1000);
-		  //TODO
-		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-	  }
+      if (isTimerExpired(0) == 1) {
+          setTimer(0, 1000);
+          HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+          HAL_GPIO_TogglePin(GPIOA, LED_RED_Pin | DOT_Pin);
+          ++second;
+          if (second >= 60) {
+              second = 0;
+              ++minute;
+          }
+
+          if (minute >= 60) {
+              minute = 0;
+              ++hour;
+          }
+          if (hour >= 24) {
+              hour = 0;
+          }
+          updateClockBuffer();
+      }
+
+      if (isTimerExpired(1) == 1) {
+          setTimer(1, 250);
+          update7SEG(index_led);
+          ++index_led;
+          if (index_led > 3) {
+              index_led = 0;
+          }
+      }
+
+      if (isTimerExpired(2) == 1) {
+    	  setTimer(2, 10);
+    	  updateLEDMatrix(index_led_matrix);
+    	  ++index_led_matrix;
+    	  if (index_led_matrix >= MAX_LED_MATRIX) {
+    		  index_led_matrix = 0;
+    	  }
+      }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
