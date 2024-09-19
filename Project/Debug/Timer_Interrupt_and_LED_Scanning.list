@@ -959,19 +959,19 @@ void shiftleftLEDMatrix() {
  8000806:	2300      	movs	r3, #0
  8000808:	607b      	str	r3, [r7, #4]
  800080a:	e017      	b.n	800083c <shiftleftLEDMatrix+0x3c>
-		matrix_buffer[i] = (matrix_buffer[i] << 1) | ((matrix_buffer[i] >> 7) & 1);
+		matrix_buffer[i] = (matrix_buffer[i] >> 1) | ((matrix_buffer[i] & 1) << 7);
  800080c:	4a10      	ldr	r2, [pc, #64]	; (8000850 <shiftleftLEDMatrix+0x50>)
  800080e:	687b      	ldr	r3, [r7, #4]
  8000810:	4413      	add	r3, r2
  8000812:	781b      	ldrb	r3, [r3, #0]
- 8000814:	005b      	lsls	r3, r3, #1
- 8000816:	b25a      	sxtb	r2, r3
- 8000818:	490d      	ldr	r1, [pc, #52]	; (8000850 <shiftleftLEDMatrix+0x50>)
- 800081a:	687b      	ldr	r3, [r7, #4]
- 800081c:	440b      	add	r3, r1
- 800081e:	781b      	ldrb	r3, [r3, #0]
- 8000820:	09db      	lsrs	r3, r3, #7
- 8000822:	b2db      	uxtb	r3, r3
+ 8000814:	085b      	lsrs	r3, r3, #1
+ 8000816:	b2db      	uxtb	r3, r3
+ 8000818:	b25a      	sxtb	r2, r3
+ 800081a:	490d      	ldr	r1, [pc, #52]	; (8000850 <shiftleftLEDMatrix+0x50>)
+ 800081c:	687b      	ldr	r3, [r7, #4]
+ 800081e:	440b      	add	r3, r1
+ 8000820:	781b      	ldrb	r3, [r3, #0]
+ 8000822:	01db      	lsls	r3, r3, #7
  8000824:	b25b      	sxtb	r3, r3
  8000826:	4313      	orrs	r3, r2
  8000828:	b25b      	sxtb	r3, r3
