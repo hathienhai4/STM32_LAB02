@@ -4,9 +4,9 @@ main.c:186:6:updateClockBuffer	4	static
 main.c:197:6:displayLEDMatrix	16	static
 main.c:208:6:updateLEDMatrix	16	static
 main.c:255:6:shiftleftLEDMatrix	16	static
-main.c:272:5:main	8	static
-main.c:358:6:SystemClock_Config	72	static
-main.c:394:13:MX_TIM2_Init	32	static
-main.c:439:13:MX_GPIO_Init	32	static
-main.c:488:6:HAL_TIM_PeriodElapsedCallback	16	static
-main.c:497:6:Error_Handler	4	static,ignoring_inline_asm
+main.c:266:5:main	8	static
+main.c:352:6:SystemClock_Config	72	static
+main.c:388:13:MX_TIM2_Init	32	static
+main.c:433:13:MX_GPIO_Init	32	static
+main.c:482:6:HAL_TIM_PeriodElapsedCallback	16	static
+main.c:491:6:Error_Handler	4	static,ignoring_inline_asm

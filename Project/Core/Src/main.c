@@ -253,15 +253,9 @@ void updateLEDMatrix(int index){
 }
 
 void shiftleftLEDMatrix() {
-	uint8_t tmp = matrix_buffer[0];
-	matrix_buffer[0] = matrix_buffer[1];
-	matrix_buffer[1] = matrix_buffer[2];
-	matrix_buffer[2] = matrix_buffer[3];
-	matrix_buffer[3] = matrix_buffer[4];
-	matrix_buffer[4] = matrix_buffer[5];
-	matrix_buffer[5] = matrix_buffer[6];
-	matrix_buffer[6] = matrix_buffer[7];
-	matrix_buffer[7] = tmp;
+	for (int i = 0; i < MAX_LED_MATRIX; ++i) {
+		matrix_buffer[i] = (matrix_buffer[i] << 1) | ((matrix_buffer[i] >> 7) & 1);
+	}
 }
 /* USER CODE END 0 */
 
